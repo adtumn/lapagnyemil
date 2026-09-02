@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Pota ID - The Ultimate Japanese Gourmet Fries</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pota: {
+                            gold: '#FBBF24',
+                            amber: '#D97706',
+                            red: '#E11D48',
+                            dark: '#121214',
+                            card: '#1E1E24',
+                            cream: '#FFFBEB'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Bebas Neue', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        .glow-gold {
+            box-shadow: 0 0 25px rgba(251, 191, 36, 0.35);
+        }
+        .text-stroke {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);
+        }
+        .japanese-bg {
+            background-image: radial-gradient(rgba(251, 191, 36, 0.08) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121214;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FBBF24;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-pota-dark text-white font-sans antialiased overflow-x-hidden selection:bg-pota-gold selection:text-black">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-pota-amber via-pota-gold to-pota-amber text-black py-1.5 px-4 text-center font-bold text-xs md:text-sm tracking-wider flex items-center justify-center gap-2">
+        <span class="animate-pulse">✨</span>
+        <span>PROMO SPESIAL: GRATIS UPGRADE KE ULTRA MEGA LONG FRIES HARI INI!</span>
+        <span class="animate-pulse">✨</span>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 bg-pota-dark/95 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <a href="#" class="flex items-center gap-2 group">
+                        <div class="w-11 h-11 bg-pota-gold rounded-xl flex items-center justify-center text-black font-black text-2xl shadow-lg group-hover:rotate-6 transition-transform">
+                            🍟
+                        </div>
+                        <div>
+                            <span class="font-display text-3xl tracking-wider text-pota-gold leading-none">SAN POTA</span>
+                            <span class="text-[10px] block text-gray-400 tracking-widest font-semibold uppercase -mt-1">サンポタ • JAPAN GOURMET</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center gap-8 font-semibold text-sm">
+                    <a href="#hero" class="text-white hover:text-pota-gold transition-colors">Beranda</a>
+                    <a href="#menu" class="text-gray-300 hover:text-pota-gold transition-colors">Menu Favorit</a>
+                    <a href="#customizer" class="text-gray-300 hover:text-pota-gold transition-colors">Mix & Match</a>
+                    <a href="#story" class="text-gray-300 hover:text-pota-gold transition-colors">Rahasia Renyah</a>
+                    <a href="#outlets" class="text-gray-300 hover:text-pota-gold transition-colors">Lokasi Outlet</a>
+                </nav>
+
+                <!-- Actions: Cart & CTA -->
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleCart()" class="relative p-2.5 bg-pota-card hover:bg-white/10 rounded-xl transition-all border border-white/10">
+                        <i class="fa-solid fa-bag-shopping text-pota-gold text-lg"></i>
+                        <span id="cartCount" class="absolute -top-1.5 -right-1.5 bg-pota-red text-white text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                    </button>
+                    
+                    <a href="#menu" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-pota-gold text-black font-bold rounded-xl hover:bg-yellow-400 transition-all transform hover:-translate-y-0.5 shadow-lg shadow-pota-gold/20 text-sm">
+                        <span>Pesan Sekarang</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+
+                    <!-- Mobile Menu Button -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden p-2.5 text-gray-300 hover:text-white">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-pota-card border-b border-white/10 px-4 pt-3 pb-6 space-y-3">
+            <a href="#hero" onclick="toggleMobileMenu()" class="block py-2 text-white font-medium hover:text-pota-gold">Beranda</a>
+            <a href="#menu" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 font-medium hover:text-pota-gold">Menu Favorit</a>
+            <a href="#customizer" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 font-medium hover:text-pota-gold">Mix & Match</a>
+            <a href="#story" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 font-medium hover:text-pota-gold">Rahasia Renyah</a>
+            <a href="#outlets" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 font-medium hover:text-pota-gold">Lokasi Outlet</a>
+            <a href="#menu" onclick="toggleMobileMenu()" class="block w-full text-center py-3 bg-pota-gold text-black font-bold rounded-xl">Pesan Sekarang</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative pt-12 pb-24 lg:py-28 overflow-hidden japanese-bg">
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-pota-gold/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-pota-red/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Hero Content -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pota-gold/10 border border-pota-gold/30 text-pota-gold text-xs font-bold uppercase tracking-widest">
+                        <i class="fa-solid fa-award"></i> Pelopor Japanese Long Fries di Indonesia
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-display tracking-tight text-white leading-none">
+                        EXTRA RENYAH. <br>
+                        <span class="text-pota-gold underline decoration-pota-red decoration-wavy decoration-2">SUPER PANJANG.</span> <br>
+                        100% GOURMET.
+                    </h1>
+
+                    <p class="text-gray-300 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        Rasakan sensasi kentang goreng khas Jepang dengan panjang hingga 30cm, renyah di luar, super lembut di dalam dengan taburan bumbu umami rahasia khas San Pota.
+                    </p>
+
+                    <!-- CTAs & Stats -->
+                    <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#menu" class="w-full sm:w-auto px-8 py-4 bg-pota-gold text-black font-bold text-base rounded-2xl hover:bg-yellow-400 transition-all glow-gold flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-utensils"></i>
+                            <span>Jelajahi Menu Utama</span>
+                        </a>
+                        <a href="#customizer" class="w-full sm:w-auto px-8 py-4 bg-pota-card border border-white/20 text-white font-bold text-base rounded-2xl hover:bg-white/10 transition-all flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-wand-magic-sparkles text-pota-gold"></i>
+                            <span>Racik Saus Sendiri</span>
+                        </a>
+                    </div>
+
+                    <!-- Quick Highlight Badges -->
+                    <div class="pt-8 border-t border-white/10 grid grid-cols-3 gap-4 text-center lg:text-left">
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-display text-pota-gold font-bold">30+ CM</p>
+                            <p class="text-xs text-gray-400 font-medium">Panjang Maksimal</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-display text-white font-bold">12+ FLAVOR</p>
+                            <p class="text-xs text-gray-400 font-medium">Bumbu & Glaze Asli</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-display text-pota-red font-bold">100% HALAL</p>
+                            <p class="text-xs text-gray-400 font-medium">Bahan Berkualitas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Interactive Visual -->
+                <div class="lg:col-span-5 relative flex justify-center">
+                    <div class="relative w-full max-w-md">
+                        <!-- Outer Glow Ring -->
+                        <div class="absolute inset-0 bg-gradient-to-tr from-pota-gold/30 to-pota-red/30 rounded-3xl blur-2xl transform rotate-6"></div>
+                        
+                        <!-- Main Card -->
+                        <div class="relative bg-pota-card border border-white/15 rounded-3xl p-6 shadow-2xl overflow-hidden">
+                            <!-- Japanese Stamp Tag -->
+                            <div class="absolute top-4 right-4 bg-pota-red text-white text-[11px] font-black px-3 py-1 rounded-full uppercase tracking-wider border border-white/20">
+                                Best Seller #1
+                            </div>
+
+                            <!-- Visual Graphic -->
+                            <div class="h-64 sm:h-72 rounded-2xl bg-gradient-to-b from-yellow-950/40 via-pota-dark to-pota-card flex items-center justify-center relative overflow-hidden border border-white/5">
+                                <div class="text-center p-4">
+                                    <!-- Stylized SVG Long Potato Container -->
+                                    <svg class="w-48 h-48 mx-auto drop-shadow-[0_15px_15px_rgba(251,191,36,0.4)] animate-pulse" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <!-- Fries -->
+                                        <rect x="50" y="20" width="14" height="130" rx="7" fill="#FBBF24" transform="rotate(-10 50 20)"/>
+                                        <rect x="75" y="10" width="14" height="145" rx="7" fill="#F59E0B"/>
+                                        <rect x="100" y="15" width="14" height="140" rx="7" fill="#FCD34D" transform="rotate(8 100 15)"/>
+                                        <rect x="125" y="25" width="14" height="125" rx="7" fill="#D97706" transform="rotate(18 125 25)"/>
+                                        <!-- Drizzle Sauce -->
+                                        <path d="M40 70 Q90 100 150 65" stroke="#E11D48" stroke-width="8" stroke-linecap="round" fill="none"/>
+                                        <path d="M45 95 Q95 125 145 90" stroke="#FBBF24" stroke-width="6" stroke-linecap="round" fill="none"/>
+                                        <!-- Box Container -->
+                                        <path d="M35 110 L155 110 L140 185 L50 185 Z" fill="#121214" stroke="#FBBF24" stroke-width="4"/>
+                                        <text x="95" y="155" fill="#FBBF24" font-size="16" font-family="Bebas Neue" text-anchor="middle" font-weight="bold">SAN POTA</text>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <!-- Product Info Bar -->
+                            <div class="mt-5 space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="font-bold text-xl text-white">Mentaiko Super Fries</h3>
+                                    <span class="text-pota-gold font-extrabold text-lg">Rp 35.000</span>
+                                </div>
+                                <p class="text-gray-400 text-xs">Saus Mentaiko creamy Jepang, bubuk nori panggang, & butiran tobiko renyah.</p>
+                                
+                                <button onclick="addToCart(1, 'Mentaiko Super Fries', 35000, 'Signature Long Fries')" class="w-full mt-3 py-3 bg-white/10 hover:bg-pota-gold hover:text-black font-bold text-sm rounded-xl transition-all flex items-center justify-center gap-2 border border-white/10">
+                                    <i class="fa-solid fa-plus"></i> Tambah ke Keranjang
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-20 bg-pota-card/60 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Title -->
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-pota-gold text-xs font-black uppercase tracking-widest bg-pota-gold/10 px-3 py-1 rounded-full border border-pota-gold/20">Menu Paling Dicari</span>
+                <h2 class="text-3xl sm:text-5xl font-display text-white mt-2">PILIHAN GOURMET SAN POTA</h2>
+                <p class="text-gray-400 text-sm sm:text-base mt-2">Dibuat segar setiap pesanan menggunakan 100% kentang pilihan dengan formulasi saus premium.</p>
+                
+                <!-- Category Filter Buttons -->
+                <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-8" id="categoryTabs">
+                    <button onclick="filterCategory('all')" class="category-btn active px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-pota-gold text-black transition-all">Semua Menu</button>
+                    <button onclick="filterCategory('long-fries')" class="category-btn px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-white/5 text-gray-300 hover:bg-white/10 transition-all">Signature Long</button>
+                    <button onclick="filterCategory('loaded')" class="category-btn px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-white/5 text-gray-300 hover:bg-white/10 transition-all">Loaded Overload</button>
+                    <button onclick="filterCategory('drinks')" class="category-btn px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-white/5 text-gray-300 hover:bg-white/10 transition-all">Minuman Segar</button>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Cards will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Flavor Customizer / Mix & Match -->
+    <section id="customizer" class="py-20 japanese-bg relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-b from-pota-card to-pota-dark border border-pota-gold/30 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-8 text-white/5 pointer-events-none font-display text-9xl">MIX</div>
+
+                <div class="text-center max-w-xl mx-auto mb-8">
+                    <span class="text-pota-gold text-xs font-black uppercase tracking-widest"><i class="fa-solid fa-flask"></i> Laboratorium Rasa</span>
+                    <h2 class="text-3xl sm:text-4xl font-display text-white mt-1">SAN POTA FLAVOR LAB</h2>
+                    <p class="text-gray-400 text-xs sm:text-sm">Racik kentang impianmu! Pilih ukuran, bumbu dasar (*seasoning*), dan saus spesial.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                    <!-- Step 1: Base Size -->
+                    <div class="space-y-3 bg-white/5 p-4 rounded-2xl border border-white/5">
+                        <label class="font-bold text-sm text-pota-gold flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-full bg-pota-gold text-black text-xs flex items-center justify-center font-black">1</span>
+                            Pilih Ukuran Kentang
+                        </label>
+                        <div class="space-y-2">
+                            <button type="button" onclick="selectCustomOption('size', 'Regular Long', 25000)" class="opt-size w-full text-left p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-transparent transition-all flex justify-between items-center active-opt border-pota-gold">
+                                <div>
+                                    <p class="font-bold text-sm text-white">Regular Long (20cm)</p>
+                                    <p class="text-[11px] text-gray-400">Porsi pas untuk santai</p>
+                                </div>
+                                <span class="text-xs font-bold text-pota-gold">Rp 25.000</span>
+                            </button>
+                            <button type="button" onclick="selectCustomOption('size', 'Mega Long 30cm', 35000)" class="opt-size w-full text-left p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-transparent transition-all flex justify-between items-center">
+                                <div>
+                                    <p class="font-bold text-sm text-white">Monster Long (30cm)</p>
+                                    <p class="text-[11px] text-gray-400">Paling panjang & puas</p>
+                                </div>
+                                <span class="text-xs font-bold text-pota-gold">Rp 35.000</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Seasoning Powder -->
+                    <div class="space-y-3 bg-white/5 p-4 rounded-2xl border border-white/5">
+                        <label class="font-bold text-sm text-pota-gold flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-full bg-pota-gold text-black text-xs flex items-center justify-center font-black">2</span>
+                            Bumbu Tabur Gurih
+                        </label>
+                        <div class="space-y-2">
+                            <button type="button" onclick="selectCustomOption('seasoning', 'Tokyo Seaweed Nori', 0)" class="opt-seasoning w-full text-left p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-transparent transition-all active-opt border-pota-gold">
+                                <p class="font-bold text-sm text-white">Tokyo Nori Umami</p>
+                                <p class="text-[11px] text-gray-400">Rumput laut manis gurih</p>
+                            </button>
+                            <button type="button" onclick="selectCustomOption('seasoning', 'Spicy BBQ Togarashi', 0)" class="opt-seasoning w-full text-left p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-transparent transition-all">
+                                <p class="font-bold text-sm text-white">Spicy BBQ Togarashi</p>
+                                <p class="text-[11px] text-gray-400">Pedas cabe jepang & asap BBQ</p>
+                            </button>
+                            <button type="button" onclick="selectCustomOption('seasoning', 'Hokkaido Butter Cheese', 0)" class="opt-seasoning w-full text-left p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-transparent transition-all">
+                                <p class="font-bold text-sm text-white">Hokkaido Butter Cheese</p>
+                                <p class="text-[11px] text-gray-400">Keju mentega legit & gurih</p>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Gourmet Dip & Summary -->
+                    <div class="space-y-3 bg-white/5 p-4 rounded-2xl border border-white/5">
+                        <label class="font-bold text-sm text-pota-gold flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-full bg-pota-gold text-black text-xs flex items-center justify-center font-black">3</span>
+                            Saus Glaze Tambahan
+                        </label>
+                        <div class="space-y-2">
+                            <button type="button" onclick="selectCustomOption('sauce', 'Japanese Truffle Mayo', 7000)" class="opt-sauce w-full text-left p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-transparent transition-all flex justify-between items-center active-opt border-pota-gold">
+                                <span class="font-bold text-xs text-white">Truffle Mayo</span>
+                                <span class="text-xs text-pota-gold font-bold">+Rp 7.000</span>
+                            </button>
+                            <button type="button" onclick="selectCustomOption('sauce', 'Creamy Mentaiko Dip', 8000)" class="opt-sauce w-full text-left p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-transparent transition-all flex justify-between items-center">
+                                <span class="font-bold text-xs text-white">Mentaiko Dip</span>
+                                <span class="text-xs text-pota-gold font-bold">+Rp 8.000</span>
+                            </button>
+                            <button type="button" onclick="selectCustomOption('sauce', 'Sweet Okonomi Glaze', 5000)" class="opt-sauce w-full text-left p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-transparent transition-all flex justify-between items-center">
+                                <span class="font-bold text-xs text-white">Okonomi Glaze</span>
+                                <span class="text-xs text-pota-gold font-bold">+Rp 5.000</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customizer Summary Bar -->
+                <div class="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 bg-black/40 p-4 rounded-2xl">
+                    <div>
+                        <p class="text-xs text-gray-400">Ringkasan Kreasi:</p>
+                        <p id="customSummaryText" class="font-bold text-white text-sm">Regular Long + Tokyo Nori + Truffle Mayo</p>
+                    </div>
+                    <div class="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end">
+                        <div class="text-right">
+                            <p class="text-[10px] text-gray-400">Total Harga</p>
+                            <p id="customTotalPrice" class="font-bold text-xl text-pota-gold">Rp 32.000</p>
+                        </div>
+                        <button onclick="addCustomPotatoToCart()" class="px-6 py-3 bg-pota-gold text-black font-extrabold text-sm rounded-xl hover:bg-yellow-400 transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-cart-plus"></i> Tambahkan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why San Pota / The Secret Crunch -->
+    <section id="story" class="py-20 bg-pota-dark border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <span class="text-pota-red text-xs font-black uppercase tracking-widest bg-pota-red/10 px-3 py-1 rounded-full border border-pota-red/20">Standar Kualitas</span>
+                    <h2 class="text-3xl sm:text-5xl font-display text-white">KENAPA SAN POTA BEDA DARI YANG LAIN?</h2>
+                    <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                        Kami memadukan teknik pemadatan adonan kentang khas street-food Harajuku dengan bahan alami tanpa pengawet. Menghasilkan tekstur luar super garing yang tahan hingga 45 menit!
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/5">
+                            <div class="w-10 h-10 rounded-xl bg-pota-gold/20 text-pota-gold flex items-center justify-center font-bold text-lg shrink-0">
+                                01
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Hokkaido Potato Mash Quality</h4>
+                                <p class="text-xs text-gray-400 mt-1">Menggunakan pati kentang impor dengan kepadatan tinggi untuk kelembutan interior maksimal.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/5">
+                            <div class="w-10 h-10 rounded-xl bg-pota-red/20 text-pota-red flex items-center justify-center font-bold text-lg shrink-0">
+                                02
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Double Fry Temperature Technique</h4>
+                                <p class="text-xs text-gray-400 mt-1">Digoreng dua kali dalam minyak kelapa sawit premium pada suhu presisi 180°C.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/5">
+                            <div class="w-10 h-10 rounded-xl bg-pota-gold/20 text-pota-gold flex items-center justify-center font-bold text-lg shrink-0">
+                                03
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Fresh Made to Order</h4>
+                                <p class="text-xs text-gray-400 mt-1">Dicetak panjang langsung saat dipesan, menjamin kentang selalu hangat dan renyah.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual Comparison Grid -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-pota-card border border-white/10 rounded-3xl p-6 text-center space-y-3">
+                        <span class="text-4xl">📏</span>
+                        <h4 class="font-display text-2xl text-pota-gold">30 CM</h4>
+                        <p class="text-xs text-gray-400">Ukuran ekstra panjang yang tidak Anda temukan di kentang beku biasa.</p>
+                    </div>
+                    <div class="bg-pota-card border border-white/10 rounded-3xl p-6 text-center space-y-3 mt-6">
+                        <span class="text-4xl">⏱️</span>
+                        <h4 class="font-display text-white">45 MENIT</h4>
+                        <p class="text-xs text-gray-400">Tetap renyah tahan lama saat dibawa pulang (*takeaway* / *delivery*).</p>
+                    </div>
+                    <div class="bg-pota-card border border-white/10 rounded-3xl p-6 text-center space-y-3">
+                        <span class="text-4xl">🧀</span>
+                        <h4 class="font-display text-white">REAL SAUCE</h4>
+                        <p class="text-xs text-gray-400">Saus olahan racikan chef bukan sekadar bubuk perasa biasa.</p>
+                    </div>
+                    <div class="bg-pota-card border border-white/10 rounded-3xl p-6 text-center space-y-3 mt-6">
+                        <span class="text-4xl">🔥</span>
+                        <h4 class="font-display text-pota-red">HOT CRISP</h4>
+                        <p class="text-xs text-gray-400">Sensasi gigitan renyah berbunyi renyah di setiap kunyahan.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Store Locations Section -->
+    <section id="outlets" class="py-20 bg-pota-card/40 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-xl mx-auto mb-12">
+                <span class="text-pota-gold text-xs font-black uppercase tracking-widest bg-pota-gold/10 px-3 py-1 rounded-full border border-pota-gold/20">Kunjungi Booth Kami</span>
+                <h2 class="text-3xl sm:text-5xl font-display text-white mt-2">LOKASI OUTLET SAN POTA</h2>
+                <p class="text-gray-400 text-xs sm:text-sm mt-1">Temukan booth San Pota terdekat di mall favorit kotamu.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Outlet 1 -->
+                <div class="bg-pota-card border border-white/10 rounded-2xl p-6 hover:border-pota-gold/50 transition-all">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-bold px-2.5 py-1 bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/20">Buka Sekarang</span>
+                        <span class="text-xs text-gray-400"><i class="fa-regular fa-clock"></i> 10.00 - 22.00</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-white">San Pota - Grand Indonesia</h3>
+                    <p class="text-gray-400 text-xs mt-1">West Mall Lt. 3A (Area Foodprint), Jakarta Pusat</p>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <a href="https://maps.google.com" target="_blank" class="text-xs font-bold text-pota-gold hover:underline flex items-center gap-1">
+                            <i class="fa-solid fa-location-dot"></i> Petunjuk Arah
+                        </a>
+                        <span class="text-[11px] text-gray-400">Available di Grab/GoFood</span>
+                    </div>
+                </div>
+
+                <!-- Outlet 2 -->
+                <div class="bg-pota-card border border-white/10 rounded-2xl p-6 hover:border-pota-gold/50 transition-all">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-bold px-2.5 py-1 bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/20">Buka Sekarang</span>
+                        <span class="text-xs text-gray-400"><i class="fa-regular fa-clock"></i> 10.00 - 22.00</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-white">San Pota - Summarecon Mall Serpong</h3>
+                    <p class="text-gray-400 text-xs mt-1">Ground Floor (Depan Salsa Food City), Tangerang</p>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <a href="https://maps.google.com" target="_blank" class="text-xs font-bold text-pota-gold hover:underline flex items-center gap-1">
+                            <i class="fa-solid fa-location-dot"></i> Petunjuk Arah
+                        </a>
+                        <span class="text-[11px] text-gray-400">Dine-in & Takeaway</span>
+                    </div>
+                </div>
+
+                <!-- Outlet 3 -->
+                <div class="bg-pota-card border border-white/10 rounded-2xl p-6 hover:border-pota-gold/50 transition-all">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-bold px-2.5 py-1 bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/20">Buka Sekarang</span>
+                        <span class="text-xs text-gray-400"><i class="fa-regular fa-clock"></i> 10.00 - 22.00</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-white">San Pota - Paris Van Java</h3>
+                    <p class="text-gray-400 text-xs mt-1">Concourse Level (Dekat Skyfield), Bandung</p>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <a href="https://maps.google.com" target="_blank" class="text-xs font-bold text-pota-gold hover:underline flex items-center gap-1">
+                            <i class="fa-solid fa-location-dot"></i> Petunjuk Arah
+                        </a>
+                        <span class="text-[11px] text-gray-400">Online Order Ready</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Ticker / Instagram Reviews -->
+    <section class="py-14 bg-black border-y border-white/10 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 text-center mb-6">
+            <p class="text-xs font-bold uppercase tracking-widest text-gray-400">Dicintai Lebih Dari 50.000+ Foodies Indonesia</p>
+        </div>
+        <div class="flex gap-6 animate-[marquee_25s_linear_infinite] whitespace-nowrap">
+            <div class="inline-flex gap-4">
+                <div class="bg-pota-card px-5 py-3 rounded-2xl border border-white/10 text-xs flex items-center gap-3">
+                    <span class="text-pota-gold font-bold">@kulinerjakarta:</span> "Kentang terpanjang dan saus mentaikonya beneran creamy!" ⭐⭐⭐⭐⭐
+                </div>
+                <div class="bg-pota-card px-5 py-3 rounded-2xl border border-white/10 text-xs flex items-center gap-3">
+                    <span class="text-pota-gold font-bold">@snackhunter.id:</span> "Crunchy-nya awet banget biarpun udah dibawa jalan 30 menit." ⭐⭐⭐⭐⭐
+                </div>
+                <div class="bg-pota-card px-5 py-3 rounded-2xl border border-white/10 text-xs flex items-center gap-3">
+                    <span class="text-pota-gold font-bold">@bandungfoodie:</span> "Truffle fries versi terjangkau tapi rasa bintang lima." ⭐⭐⭐⭐⭐
+                </div>
+                <div class="bg-pota-card px-5 py-3 rounded-2xl border border-white/10 text-xs flex items-center gap-3">
+                    <span class="text-pota-gold font-bold">@tangselkuliner:</span> "Anak-anak suka banget sama Hokkaido butter cheese-nya!" ⭐⭐⭐⭐⭐
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-pota-dark pt-16 pb-12 border-t border-white/10 text-gray-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <!-- Brand Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-pota-gold rounded-lg flex items-center justify-center text-black font-black text-lg">🍟</div>
+                        <span class="font-display text-2xl tracking-wider text-pota-gold">SAN POTA</span>
+                    </div>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Pelopor Japanese Long Potato Fries dengan cita rasa saus otentik Jepang di Indonesia. Renyah, lezat, dan selalu segar setiap saat.
+                    </p>
+                    <div class="flex items-center gap-3 text-white">
+                        <a href="#" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-pota-gold hover:text-black transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-pota-gold hover:text-black transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-pota-gold hover:text-black transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div>
+                    <h4 class="font-bold text-white text-sm uppercase tracking-wider mb-4">Eksplorasi</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#hero" class="hover:text-pota-gold">Beranda</a></li>
+                        <li><a href="#menu" class="hover:text-pota-gold">Menu Long Fries</a></li>
+                        <li><a href="#customizer" class="hover:text-pota-gold">Racik Rasa (Mix Lab)</a></li>
+                        <li><a href="#outlets" class="hover:text-pota-gold">Cari Gerai Terdekat</a></li>
+                        <li><a href="#" class="hover:text-pota-gold">Kemitraan Franchise</a></li>
+                    </ul>
+                </div>
+
+                <!-- Halal & Quality Guarantee -->
+                <div>
+                    <h4 class="font-bold text-white text-sm uppercase tracking-wider mb-4">Jaminan Mutu</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 100% Bahan Halal & Higienis</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Minyak Goreng Selalu Terfilter</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Tanpa Pengawet Buatan</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Kemasan Food-Grade Ramah Lingkungan</li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter / Franchise Contact -->
+                <div>
+                    <h4 class="font-bold text-white text-sm uppercase tracking-wider mb-4">Info Promo & Franchise</h4>
+                    <p class="text-xs text-gray-400 mb-3">Dapatkan voucher potongan harga dan info kemitraan bisnis.</p>
+                    <div class="flex gap-2">
+                        <input type="email" placeholder="Email kamu..." class="bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-pota-gold flex-1">
+                        <button class="bg-pota-gold text-black font-bold px-3 py-2 rounded-xl text-xs hover:bg-yellow-400 transition-colors">Kirim</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+                <p>© 2026 San Pota Indonesia. Hak Cipta Dilindungi.</p>
+                <p class="text-gray-500">Made with ❤️ for Potato Lovers</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Slide-over Cart Drawer -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 overflow-hidden hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+        <!-- Backdrop -->
+        <div onclick="toggleCart()" class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity"></div>
+
+        <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+            <div class="pointer-events-auto w-screen max-w-md bg-pota-card border-l border-white/10 flex flex-col shadow-2xl">
+                <!-- Cart Header -->
+                <div class="p-6 border-b border-white/10 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-bag-shopping text-pota-gold text-xl"></i>
+                        <h3 class="font-display text-2xl text-white tracking-wider">PESANAN ANDA</h3>
+                    </div>
+                    <button onclick="toggleCart()" class="p-2 text-gray-400 hover:text-white rounded-lg">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+
+                <!-- Cart Items List -->
+                <div id="cartItemsList" class="flex-1 overflow-y-auto p-6 space-y-4">
+                    <!-- Dynamic cart items here -->
+                </div>
+
+                <!-- Cart Footer & Checkout -->
+                <div class="p-6 border-t border-white/10 bg-black/30 space-y-4">
+                    <div class="flex justify-between items-center text-sm">
+                        <span class="text-gray-400">Total Pembayaran:</span>
+                        <span id="cartDrawerTotal" class="text-xl font-extrabold text-pota-gold">Rp 0</span>
+                    </div>
+
+                    <button onclick="checkoutOrder()" class="w-full py-4 bg-pota-gold text-black font-extrabold rounded-2xl hover:bg-yellow-400 transition-all flex items-center justify-center gap-2 glow-gold">
+                        <span>Lanjut ke Pembayaran</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Order Modal -->
+    <div id="orderModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-pota-card border border-pota-gold/40 rounded-3xl p-6 sm:p-8 max-w-md w-full text-center space-y-4 shadow-2xl">
+            <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center text-3xl mx-auto border border-emerald-500/30">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h3 class="font-display text-3xl text-white">PESANAN DITERIMA!</h3>
+            <p class="text-gray-300 text-xs leading-relaxed">
+                Terima kasih telah memesan San Pota Gourmet Fries! Pesanan Anda sedang disiapkan segar langsung dari penggorengan.
+            </p>
+            <div class="bg-white/5 p-4 rounded-xl border border-white/5 text-left text-xs space-y-1">
+                <div class="flex justify-between text-gray-400">
+                    <span>Nomor Pesanan:</span>
+                    <span class="font-bold text-white" id="orderNumber">#SP-88291</span>
+                </div>
+                <div class="flex justify-between text-gray-400">
+                    <span>Estimasi Siap:</span>
+                    <span class="font-bold text-pota-gold">10 - 15 Menit</span>
+                </div>
+            </div>
+            <button onclick="closeOrderModal()" class="w-full py-3 bg-pota-gold text-black font-bold text-sm rounded-xl hover:bg-yellow-400 transition-all">
+                Selesai & Pesan Lagi
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Sample San Pota Menu Dataset
+        const menuData = [
+            {
+                id: 1,
+                title: "Mentaiko Super Long Fries",
+                category: "long-fries",
+                price: 35000,
+                desc: "Kentang 30cm dengan lumuran saus creamy cod roe khas Jepang dan taburan nori crispy.",
+                tag: "Best Seller",
+                badgeColor: "bg-pota-red"
+            },
+            {
+                id: 2,
+                title: "Truffle Gold Mayo Fries",
+                category: "long-fries",
+                price: 38000,
+                desc: "Aroma minyak truffle hitam premium dipadukan kelembutan saus mayo Jepang dan parsley.",
+                tag: "Favorit",
+                badgeColor: "bg-pota-amber"
+            },
+            {
+                id: 3,
+                title: "Tokyo Seaweed Garlic Crunch",
+                category: "long-fries",
+                price: 30000,
+                desc: "Sensasi gurih rumput laut Tokyo asli dengan sentuhan garlic butter yang harum.",
+                tag: "Klasik",
+                badgeColor: "bg-emerald-600"
+            },
+            {
+                id: 4,
+                title: "Loaded Okonomiyaki Pota",
+                category: "loaded",
+                price: 42000,
+                desc: "Kentang goreng bertabur katsuobushi menari, saus okonomi manis, mayo, dan aonori.",
+                tag: "Overload",
+                badgeColor: "bg-purple-600"
+            },
+            {
+                id: 5,
+                title: "Spicy Volcano Cheese Fries",
+                category: "loaded",
+                price: 40000,
+                desc: "Llelehan keju mozzarella dan cheddar pedas togarashi yang meleleh di lidah.",
+                tag: "Pedas Mantap",
+                badgeColor: "bg-red-600"
+            },
+            {
+                id: 6,
+                title: "Hokkaido Matcha Milk Tea",
+                category: "drinks",
+                price: 18000,
+                desc: "Minuman matcha autentik Uji dengan susu segar Hokkaido yang creamy dan menyegarkan.",
+                tag: "Segar",
+                badgeColor: "bg-emerald-500"
+            },
+            {
+                id: 7,
+                title: "Sparkling Yuzu Lemonade",
+                category: "drinks",
+                price: 18000,
+                desc: "Soda sari jeruk yuzu Jepang dingin yang membersihkan rasa gurih di tenggorokan.",
+                tag: "Dingin Segar",
+                badgeColor: "bg-yellow-500"
+            }
+        ];
+
+        // State Management
+        let cart = [];
+        let currentCustom = {
+            size: { name: 'Regular Long', price: 25000 },
+            seasoning: { name: 'Tokyo Seaweed Nori', price: 0 },
+            sauce: { name: 'Japanese Truffle Mayo', price: 7000 }
+        };
+
+        // Render Menu Cards
+        function renderMenu(items) {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-pota-card border border-white/10 rounded-2xl p-5 hover:border-pota-gold/50 transition-all flex flex-col justify-between group";
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[11px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full text-white ${item.badgeColor}">
+                                ${item.tag}
+                            </span>
+                            <span class="text-xs text-gray-400 font-semibold uppercase">${item.category}</span>
+                        </div>
+                        
+                        <div class="w-full h-36 bg-gradient-to-t from-black/60 to-white/5 rounded-xl mb-4 flex items-center justify-center border border-white/5 group-hover:scale-[1.02] transition-transform">
+                            <span class="text-5xl drop-shadow-lg">${item.category === 'drinks' ? '🥤' : '🍟'}</span>
+                        </div>
+
+                        <h3 class="font-bold text-lg text-white group-hover:text-pota-gold transition-colors">${item.title}</h3>
+                        <p class="text-gray-400 text-xs mt-1.5 line-clamp-2 leading-relaxed">${item.desc}</p>
+                    </div>
+
+                    <div class="mt-5 pt-4 border-t border-white/10 flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] text-gray-400 block">Harga</span>
+                            <span class="font-extrabold text-white text-base">Rp ${item.price.toLocaleString('id-ID')}</span>
+                        </div>
+                        <button onclick="addToCart(${item.id}, '${item.title}', ${item.price}, '${item.category}')" class="px-4 py-2 bg-pota-gold hover:bg-yellow-400 text-black font-bold text-xs rounded-xl transition-all flex items-center gap-1.5 shadow-md">
+                            <i class="fa-solid fa-plus"></i> Tambah
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Filter Category Function
+        function filterCategory(category) {
+            // Update tabs UI
+            const buttons = document.querySelectorAll('#categoryTabs button');
+            buttons.forEach(btn => {
+                btn.className = "category-btn px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-white/5 text-gray-300 hover:bg-white/10 transition-all";
+            });
+            event.target.className = "category-btn active px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-pota-gold text-black transition-all";
+
+            if (category === 'all') {
+                renderMenu(menuData);
+            } else {
+                const filtered = menuData.filter(item => item.category === category);
+                renderMenu(filtered);
+            }
+        }
+
+        // Customizer Option Selector
+        function selectCustomOption(type, name, price) {
+            currentCustom[type] = { name, price };
+
+            // Update Active Style
+            const btns = document.querySelectorAll(`.opt-${type}`);
+            btns.forEach(b => b.classList.remove('border-pota-gold', 'bg-pota-gold/10'));
+            event.currentTarget.classList.add('border-pota-gold', 'bg-pota-gold/10');
+
+            updateCustomizerUI();
+        }
+
+        function updateCustomizerUI() {
+            const total = currentCustom.size.price + currentCustom.seasoning.price + currentCustom.sauce.price;
+            document.getElementById('customSummaryText').innerText = `${currentCustom.size.name} + ${currentCustom.seasoning.name} + ${currentCustom.sauce.name}`;
+            document.getElementById('customTotalPrice').innerText = `Rp ${total.toLocaleString('id-ID')}`;
+        }
+
+        function addCustomPotatoToCart() {
+            const total = currentCustom.size.price + currentCustom.seasoning.price + currentCustom.sauce.price;
+            const title = `Custom Mix (${currentCustom.size.name} - ${currentCustom.seasoning.name})`;
+            
+            cart.push({
+                id: Date.now(),
+                title: title,
+                price: total,
+                details: `Saus: ${currentCustom.sauce.name}`,
+                qty: 1
+            });
+
+            updateCartUI();
+            toggleCart();
+        }
+
+        // Cart Actions
+        function addToCart(id, title, price, category) {
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({
+                    id: id,
+                    title: title,
+                    price: price,
+                    details: category,
+                    qty: 1
+                });
+            }
+            updateCartUI();
+        }
+
+        function updateQuantity(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const countEl = document.getElementById('cartCount');
+            const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+            countEl.innerText = totalCount;
+
+            // Render Cart Drawer
+            const cartList = document.getElementById('cartItemsList');
+            const totalEl = document.getElementById('cartDrawerTotal');
+
+            if (cart.length === 0) {
+                cartList.innerHTML = `
+                    <div class="h-64 flex flex-col items-center justify-center text-center text-gray-500">
+                        <i class="fa-solid fa-basket-shopping text-4xl mb-3 text-gray-600"></i>
+                        <p class="text-sm font-semibold">Keranjang Masih Kosong</p>
+                        <p class="text-xs text-gray-500 mt-1">Pilih menu gourmet kentang favoritmu sekarang!</p>
+                    </div>
+                `;
+                totalEl.innerText = "Rp 0";
+                return;
+            }
+
+            let totalPrice = 0;
+            cartList.innerHTML = '';
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.qty;
+                totalPrice += itemTotal;
+
+                const itemDiv = document.createElement('div');
+                itemDiv.className = "bg-white/5 p-4 rounded-xl border border-white/5 flex items-center justify-between";
+                itemDiv.innerHTML = `
+                    <div class="pr-2">
+                        <h4 class="font-bold text-white text-sm leading-tight">${item.title}</h4>
+                        <span class="text-[11px] text-gray-400 block mt-0.5">${item.details || ''}</span>
+                        <span class="text-xs font-extrabold text-pota-gold mt-1 block">Rp ${itemTotal.toLocaleString('id-ID')}</span>
+                    </div>
+                    <div class="flex items-center gap-2 bg-black/40 px-2 py-1 rounded-lg border border-white/10">
+                        <button onclick="updateQuantity(${index}, -1)" class="text-gray-400 hover:text-white px-1 font-bold">-</button>
+                        <span class="text-xs font-bold text-white px-1">${item.qty}</span>
+                        <button onclick="updateQuantity(${index}, 1)" class="text-gray-400 hover:text-white px-1 font-bold">+</button>
+                    </div>
+                `;
+                cartList.appendChild(itemDiv);
+            });
+
+            totalEl.innerText = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+        }
+
+        function toggleCart() {
+            const drawer = document.getElementById('cartDrawer');
+            drawer.classList.toggle('hidden');
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        function checkoutOrder() {
+            if (cart.length === 0) return;
+            toggleCart();
+            document.getElementById('orderNumber').innerText = `#SP-${Math.floor(10000 + Math.random() * 90000)}`;
+            document.getElementById('orderModal').classList.remove('hidden');
+            cart = [];
+            updateCartUI();
+        }
+
+        function closeOrderModal() {
+            document.getElementById('orderModal').classList.add('hidden');
+        }
+
+        // Initialize App
+        window.addEventListener('DOMContentLoaded', () => {
+            renderMenu(menuData);
+            updateCustomizerUI();
+        });
+    </script>
+</body>
+</html>
